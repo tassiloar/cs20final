@@ -1,0 +1,83 @@
+body,
+html {
+  margin: 0;
+  padding: 0 0 0px;
+  /* Add bottom padding to fit the footer's height */
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  background-color: #FDFFF1;
+}
+
+.body {
+  background-image: url('bookhead.png');
+  background-repeat: repeat-x;
+
+}
+
+.header {
+  overflow: hidden;
+  position: relative;
+  background-color: rgba(81, 44, 29, 0.5);
+}
+
+.a {
+  color: #ECE6D1;
+  float: right;
+  text-align: center;
+  padding: 30px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  width: 109px;
+
+}
+
+.a:hover {
+  background-color: #3E8EDE;
+}
+
+.header a.active {
+  color: #f2f2f2;
+}
+
+
+.footer {
+
+  background-color: #3172AE;
+  /*position: fixed;*/
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  margin-top: 30px;
+
+}
+
+
+ul#contact li {
+  display: inline-block;
+}
+
+ul#contact a {
+  color: #ECE6D1;
+  text-align: right;
+  padding: 8px;
+  text-decoration: none;
+}
+
+ul#contact {
+  text-align: left;
+  padding-right: 10px;
+}
+
+.footer a {
+  text-decoration: none;
+  color: #ECE6D1;
+  font-size: 22px;
+}
+
+.footer p {
+  color: #ECE6D1;
+  font-size: 16px;
+  text-align: center;
+}

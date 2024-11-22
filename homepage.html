@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> Midterm: homepage</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type="text/css">
+        h1 {
+            color: #0c3356;
+            font-size: 50px;
+            text-align: center;
+            padding: 1%;
+
+        }
+
+        h2 {
+            display: block;
+            color: #0c3356;
+            font-size: 22px;
+            text-align: center;
+            padding: 1%;
+            margin: 80px;
+        }
+
+        #logo {
+            float: left;
+            text-align: center;
+        }
+
+        .image {
+            display: block;
+            margin: 0 auto;
+            border-radius: 50%;
+            height: 250px;
+        }
+
+        .imageContainer {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            color: white;
+            background-color: #3172AE;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .button:hover {
+            background-color: #3E8EDE;
+        }
+
+        #book-rec {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+            width: 200px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <script>
+        const apiURL = 'https://www.googleapis.com/books/v1/volumes?q=subject:fiction';
+        fetch(apiURL)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                const resultDiv = document.getElementById("api_result");
+                const title = document.getElementById("book_title");
+
+                //do something with random book
+                var bookId = Math.floor(Math.random() * data.totalItems);
+                data.items[bookId];
+
+            })
+            .catch(error => consol.log("Error fetching book images", error));
+    </script>
+
+    <div class="body">
+        <div class="header">
+            <a href='homepage.html' id="logo"><img src="TBC.png"></a>
+            <a href='about.html' class="a">About</a>
+            <a href='blog.html' class="a">Blog</a>
+            <a href='index 2.html' class="a">Join</a>
+            <a href='homepage.html' class="a">Home</a>
+            <a href='bookstore.html' class="a">Book store</a>
+        </div>
+    </div>
+    <h1>Welcome to TBC!</h1>
+    <div class="imageContainer">
+        <img src="homeImage (1).jpg" class="image">
+    </div>
+    <h2>TBC is Tufts Book Club! Join us for engaging discussions and a community of book lovers. Whether you're into
+        fiction, non-fiction, or poetry, there's something for everyone. Connect with fellow readers, explore diverse
+        genres, and enjoy exclusive events! You should also check out our book store, where we have used book for sells!
+    </h2>
+
+    <div class="button-container">
+        <a href="index 2.html" class="button">Join</a>
+    </div>
+
+    <div>
+        <h2>Get a book recommendation</h2>
+        <form action="/submit" method="POST" id="book-rec">
+            <label for="books">Choose a book genre:</label>
+            <select id="books" name="book_genre">
+                <option value="fiction">Fiction</option>
+                <option value="non-fiction">Non-Fiction</option>
+                <option value="science">Science</option>
+                <option value="fantasy">Fantasy</option>
+                <option value="history">History</option>
+            </select>
+            <br><br>
+            <button type="submit">Submit</button>
+
+        </form>
+    </div>
+
+    <div>
+        <h2 id="book_title">
+
+        </h2>
+    </div>
+
+    <div class="footer">
+        <p>"Read a Book Today- Join Today"</p>
+        <p>&copy; 2024 Tufts University book Clubs. All right reserved.</p>
+        <ul id="contact">
+            <li><a href='contact.html'>Contact</a></li>
+            <li><a href='donations.html'>Donations</a></li>
+            <li> <a href='resources.html'>Resources</a></li>
+        </ul>
+    </div>
+</body>
+
+</html>
