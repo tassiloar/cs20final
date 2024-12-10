@@ -85,25 +85,28 @@
         </div>
     </div> */
 
-    .book {
-        display:inline-block;
-        width:28%;
-        margin-left:4%;
-    }
-    .book_title {
-        font-size:30px;
-        text-align:center;
-        font-style:bold;
-    }
-    .book_author {
-        font-style:italic;
-        text-align:center;
-    }
-    .book_description {
-    }
-    .book_cover {
+        .book {
+            display: inline-block;
+            width: 28%;
+            margin-left: 4%;
+        }
 
-    }
+        .book_title {
+            font-size: 30px;
+            text-align: center;
+            font-style: bold;
+        }
+
+        .book_author {
+            font-style: italic;
+            text-align: center;
+        }
+
+        .book_description {}
+
+        .book_cover {
+            width: 300px;
+        }
     </style>
 
     <script>
@@ -121,43 +124,82 @@
 <body>
 
     <script>
-        const apiURL = 'https://www.googleapis.com/books/v1/volumes?q=subject:fiction';
-        fetch(apiURL)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                const bookSection = document.getElementById("book_section");
-                const books = bookSection.querySelectorAll(".book");
+        // apiURL = 'https://www.googleapis.com/books/v1/volumes?q=subject:fiction';
+        const search_button = document.getElementById("submit_query");
+        const categorySelect = document.getElementById('book_category');
 
-                //do something with random book
-                var usedIndices = [];
-                var totalBooks = data.items.length;
+        search_button.addEventListener('click', function () {
+            const category = categorySelect.value;
 
-                // title.textContent = book.volumeInfo.title || "No title";
-                // authors.textContent = book.volumeInfo.authors || "No authors";
-                // description.textContent = book.volumeInfo.description || "No description";
-                // cover.setAttribute("src", book.volumeInfo.imageLinks.smallThumbnail);
+            fetch(`https://www.googleapis.com/books/v1/volumes?q=subject:${category}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const bookSection = document.getElementById("book_section");
+                    const books = bookSection.querySelectorAll(".book");
 
-                books.forEach((bookElement, index) => {
-                    const bookIndex = getUniqueBookIndex(usedIndices, totalBooks);
-                    const bookData = data.items[bookIndex].volumeInfo;
+                    //do something with random book
+                    var usedIndices = [];
+                    var totalBooks = data.items.length;
 
-                    const title = bookElement.querySelector(".book_title");
-                    const author = bookElement.querySelector(".book_author");
-                    const description = bookElement.querySelector(".book_description");
-                    const cover = bookElement.querySelector(".book_cover");
+                    books.forEach((bookElement, index) => {
+                        const bookIndex = getUniqueBookIndex(usedIndices, totalBooks);
+                        const bookData = data.items[bookIndex].volumeInfo;
 
-                    title.textContent = bookData.title || "No title";
-                    author.textContent = bookData.authors || "No authors";
-                    description.textContent = bookData.description || "No description";
-                    cover.setAttribute("src", bookData.imageLinks?.smallThumbnail);
-                });
-            })
-            .catch(error => console.log("Error fetching book images", error));
+                        const title = bookElement.querySelector(".book_title");
+                        const author = bookElement.querySelector(".book_author");
+                        const description = bookElement.querySelector(".book_description");
+                        const cover = bookElement.querySelector(".book_cover");
+
+                        title.textContent = bookData.title || "No title";
+                        author.textContent = bookData.authors || "No authors";
+                        description.textContent = bookData.description || "No description";
+                        cover.setAttribute("src", bookData.imageLinks?.smallThumbnail);
+                    });
+                })
+                .catch(error => console.log("Error fetching book images", error));
+        });
+
+        // fetch(apiURL)
+        //     .then(response => {
+        //         if (!response.ok) {
+        //             throw new Error('Network response was not ok');
+        //         }
+        //         return response.json();
+        //     })
+        //     .then(data => {
+        //         const bookSection = document.getElementById("book_section");
+        //         const books = bookSection.querySelectorAll(".book");
+
+        //         //do something with random book
+        //         var usedIndices = [];
+        //         var totalBooks = data.items.length;
+
+        //         // title.textContent = book.volumeInfo.title || "No title";
+        //         // authors.textContent = book.volumeInfo.authors || "No authors";
+        //         // description.textContent = book.volumeInfo.description || "No description";
+        //         // cover.setAttribute("src", book.volumeInfo.imageLinks.smallThumbnail);
+
+        //         books.forEach((bookElement, index) => {
+        //             const bookIndex = getUniqueBookIndex(usedIndices, totalBooks);
+        //             const bookData = data.items[bookIndex].volumeInfo;
+
+        //             const title = bookElement.querySelector(".book_title");
+        //             const author = bookElement.querySelector(".book_author");
+        //             const description = bookElement.querySelector(".book_description");
+        //             const cover = bookElement.querySelector(".book_cover");
+
+        //             title.textContent = bookData.title || "No title";
+        //             author.textContent = bookData.authors || "No authors";
+        //             description.textContent = bookData.description || "No description";
+        //             cover.setAttribute("src", bookData.imageLinks?.smallThumbnail);
+        //         });
+        //     })
+        //     .catch(error => console.log("Error fetching book images", error));
     </script>
 
     <div class="body">
@@ -185,39 +227,39 @@
 
     <div>
         <h2>Get a book recommendation</h2>
-        <form action="/submit" method="POST" id="book-rec">
-            <label for="books">Choose a book genre:</label>
-            <select id="books" name="book_genre">
-                <option value="fiction">Fiction</option>
-                <option value="non-fiction">Non-Fiction</option>
-                <option value="science">Science</option>
-                <option value="fantasy">Fantasy</option>
-                <option value="history">History</option>
-            </select>
-            <br><br>
-            <button type="submit">Submit</button>
+        <!-- <form action="/submit" method="POST" id="book-rec">
+            <label for="books">Choose a book genre:</label> -->
+        <select id="book_category" name="book_genre">
+            <option value="fiction">Fiction</option>
+            <option value="nonfiction">Non-Fiction</option>
+            <option value="science">Science</option>
+            <option value="fantasy">Fantasy</option>
+            <option value="history">History</option>
+        </select>
+        <br><br>
+        <button id="submit_query" type="submit">Submit</button>
 
-        </form>
+        <!-- </form> -->
     </div>
 
-    <div id = "book_section">
-        <div class = "book">
+    <div id="book_section">
+        <div class="book">
             <div class="book_title"></div>
-            <div class = "book_author"></div>
-            <div class = "book_description"></div>
-            <img src="" class = "book_cover">
+            <div class="book_author"></div>
+            <div class="book_description"></div>
+            <img src="" class="book_cover">
         </div>
-        <div class = "book">
+        <div class="book">
             <div class="book_title"></div>
-            <div class = "book_author"></div>
-            <div class = "book_description"></div>
-            <img src="" class = "book_cover">
+            <div class="book_author"></div>
+            <div class="book_description"></div>
+            <img src="" class="book_cover">
         </div>
-        <div class = "book">
+        <div class="book">
             <div class="book_title"></div>
-            <div class = "book_author"></div>
-            <div class = "book_description"></div>
-            <img src="" class = "book_cover">
+            <div class="book_author"></div>
+            <div class="book_description"></div>
+            <img src="" class="book_cover">
         </div>
     </div>
 

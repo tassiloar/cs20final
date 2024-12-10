@@ -5,18 +5,20 @@ html {
   /* Add bottom padding to fit the footer's height */
   font-family: Georgia, 'Times New Roman', Times, serif;
   background-color: #FDFFF1;
+  background: linear-gradient(to bottom, #FDFFF1, #f0f0f0)
 }
 
-.body {
-  background-image: url('bookhead.png');
-  background-repeat: repeat-x;
-
-}
+.body {}
 
 .header {
   overflow: hidden;
   position: relative;
   background-color: rgba(81, 44, 29, 0.5);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+  background-image: url('bookhead.png');
+  background-repeat: repeat-x;
+  max-height: 100px;
 }
 
 .a {
@@ -27,27 +29,31 @@ html {
   text-decoration: none;
   font-size: 17px;
   width: 109px;
+  transition: background-color 0.3s ease, transform 0.3 ease;
 
 }
 
 .a:hover {
   background-color: #3E8EDE;
+  transform: scale(1.1);
 }
 
 .header a.active {
   color: #f2f2f2;
 }
 
-h1{
-  color:  #0c3356;
+h1 {
+  color: #0c3356;
   font-size: 50px;
   text-align: center;
   padding: 1%;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  letter-spacing: 2px;
 }
 
 .footer {
 
-  background-color: #3172AE;
+  background: linear-gradient(to right, #3172AE, #1c4b75);
   /*position: fixed;*/
   left: 0;
   bottom: 0;
@@ -59,6 +65,17 @@ h1{
 
 }
 
+.footer a {
+  text-decoration: none;
+  color: #ECE6D1;
+  font-size: 22px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer a:hover {
+  color: #fff;
+  transform: scale(1.1);
+}
 
 ul#contact li {
   display: inline-block;
@@ -86,4 +103,5 @@ ul#contact {
   color: #ECE6D1;
   font-size: 16px;
   text-align: center;
+  margin: 10px 0;
 }
