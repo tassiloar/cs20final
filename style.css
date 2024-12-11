@@ -8,8 +8,6 @@ html {
   background: linear-gradient(to bottom, #FDFFF1, #f0f0f0)
 }
 
-.body {}
-
 .header {
   overflow: hidden;
   position: relative;
