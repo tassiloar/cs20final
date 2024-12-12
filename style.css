@@ -18,6 +18,22 @@ html {
   color: whitesmoke;
 }
 
+#logo {
+  float: left;
+  text-align: center;
+}
+@media screen and (max-width: 880px) {
+  #logo img {
+    width: 120px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  #logo img {
+    width: 90px;
+  }
+}
+
 .a {
   color: whitesmoke;
   float: right;
@@ -27,7 +43,22 @@ html {
   font-size: 17px;
   width: 109px;
   transition: background-color 0.3s ease, transform 0.3 ease;
+}
+@media screen and (max-width: 880px) {
+  .a {
+    padding: 25px 20px; 
+    font-size: 15px;
+    width: auto;
+  }
+}
 
+@media screen and (max-width: 550px) {
+  .a {
+    padding: 15px 7px;
+    font-size: 12px;
+    width: auto;
+    margin: 5px 0;
+  }
 }
 
 .a:hover {

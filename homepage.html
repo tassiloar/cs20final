@@ -15,13 +15,10 @@
             margin: 80px;
         }
 
-        /* Logo and Image Styling */
-        #logo {
-            float: left;
-            text-align: center;
-        }
+        /* Image Styling */
+        
 
-        .image {
+        #body_image {
             display: block;
             margin: 0 auto;
             border-radius: 2%;
@@ -71,11 +68,11 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
-            margin: 20px 10px;
-            padding: 20px;
+            /* margin: 20px 10px; */
+            /* padding: 20px; */
             border: 1px solid #ddd;
             border-radius: 10px;
-            width: 300px;
+            width: 250px;
             background-color: #f9f9f9;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
@@ -140,27 +137,6 @@
             width: 200px;
         }
 
-
-        /* <div id = "book_section">
-        <div class = "book">
-            <div class="book_title"></div>
-            <div class = "book_author"></div>
-            <div class = "book_description"></div>
-            <img src="" class = "book_cover">
-        </div>
-        <div class = "book">
-            <div class="book_title"></div>
-            <div class = "book_author"></div>
-            <div class = "book_description"></div>
-            <img src="" class = "book_cover">
-        </div>
-        <div class = "book">
-            <div class="book_title"></div>
-            <div class = "book_author"></div>
-            <div class = "book_description"></div>
-            <img src="" class = "book_cover">
-        </div>
-    </div> */
         .book_recommendation {
             text-align:center;
             font-size:30;
@@ -220,10 +196,10 @@
             <a href='index 2.html' class="a">Join</a>
             <a href='homepage.html' class="a">Home</a>
         </div>
-    </div>
+
     <h1>Welcome to TBC!</h1>
     <div class="imageContainer">
-        <img src="homeimg.png" class="image">
+        <img id = "body_image" src="homeimg.png" class="image">
     </div>
     <div
         style="resize: both; overflow: auto; max-width: 800px; margin: 20px auto; border: 1px solid #ddd; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
@@ -358,67 +334,5 @@
     });
     </script>
 </body>
-
-<script>
-    // apiURL = 'https://www.googleapis.com/books/v1/volumes?q=subject:fiction';
-    const search_button = document.getElementById("submit_query");
-    const categorySelect = document.getElementById('book_category');
-
-    search_button.addEventListener('click', function () {
-        const category = categorySelect.value;
-
-        fetch(`https://www.googleapis.com/books/v1/volumes?q=subject:${category}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                const bookSection = document.getElementById("book_section");
-                const books = bookSection.querySelectorAll(".book");
-
-                if (!data.items || data.items.length === 0) {
-                    console.error("No books found for the given category.");
-                    return;
-                }
-
-                let usedIndices = new Set();
-                const totalBooks = data.items.length;
-
-                books.forEach((bookElement) => {
-                    const bookIndex = getUniqueBookIndex(usedIndices, totalBooks);
-                    if (bookIndex === null) {
-                        console.error("Ran out of unique books to display.");
-                        return;
-                    }
-
-                    const bookData = data.items[bookIndex].volumeInfo;
-
-                    const title = bookElement.querySelector(".book_title");
-                    const author = bookElement.querySelector(".book_author");
-                    const description = bookElement.querySelector(".book_description");
-                    const cover = bookElement.querySelector(".book_cover");
-
-                    title.textContent = bookData.title || "No title";
-                    author.textContent = (bookData.authors && bookData.authors.join(", ")) || "No authors";
-                    description.textContent = bookData.description || "No description";
-                    cover.setAttribute("src", bookData.imageLinks?.smallThumbnail || "fallback_image_url");
-                });
-
-                function getUniqueBookIndex(usedIndices, totalBooks) {
-                    if (usedIndices.size >= totalBooks) return null; // All books are used.
-                    let index;
-                    do {
-                        index = Math.floor(Math.random() * totalBooks);
-                    } while (usedIndices.has(index));
-                    usedIndices.add(index);
-                    return index;
-                }
-            })
-            .catch(error => console.log("Error fetching book images:", error));
-    });
-
-</script>
 
 </html>
