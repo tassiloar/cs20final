@@ -84,6 +84,10 @@
             <img src="" class = "book_cover">
         </div>
     </div> */
+        .book_recommendation {
+            text-align:center;
+            font-size:30;
+        }
 
         .book {
             display: inline-block;
@@ -102,7 +106,15 @@
             text-align: center;
         }
 
-        .book_description {}
+        .book-description {
+            position: relative;
+        }
+
+        .full-description {
+            display: none;
+            width: 100%;
+            transition: opacity 0.3s ease-in-out;
+        }
 
         .book_cover {
             width: 300px;
@@ -122,86 +134,6 @@
 </head>
 
 <body>
-
-    <script>
-        // apiURL = 'https://www.googleapis.com/books/v1/volumes?q=subject:fiction';
-        const search_button = document.getElementById("submit_query");
-        const categorySelect = document.getElementById('book_category');
-
-        search_button.addEventListener('click', function () {
-            const category = categorySelect.value;
-
-            fetch(`https://www.googleapis.com/books/v1/volumes?q=subject:${category}`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    const bookSection = document.getElementById("book_section");
-                    const books = bookSection.querySelectorAll(".book");
-
-                    //do something with random book
-                    var usedIndices = [];
-                    var totalBooks = data.items.length;
-
-                    books.forEach((bookElement, index) => {
-                        const bookIndex = getUniqueBookIndex(usedIndices, totalBooks);
-                        const bookData = data.items[bookIndex].volumeInfo;
-
-                        const title = bookElement.querySelector(".book_title");
-                        const author = bookElement.querySelector(".book_author");
-                        const description = bookElement.querySelector(".book_description");
-                        const cover = bookElement.querySelector(".book_cover");
-
-                        title.textContent = bookData.title || "No title";
-                        author.textContent = bookData.authors || "No authors";
-                        description.textContent = bookData.description || "No description";
-                        cover.setAttribute("src", bookData.imageLinks?.smallThumbnail);
-                    });
-                })
-                .catch(error => console.log("Error fetching book images", error));
-        });
-
-        // fetch(apiURL)
-        //     .then(response => {
-        //         if (!response.ok) {
-        //             throw new Error('Network response was not ok');
-        //         }
-        //         return response.json();
-        //     })
-        //     .then(data => {
-        //         const bookSection = document.getElementById("book_section");
-        //         const books = bookSection.querySelectorAll(".book");
-
-        //         //do something with random book
-        //         var usedIndices = [];
-        //         var totalBooks = data.items.length;
-
-        //         // title.textContent = book.volumeInfo.title || "No title";
-        //         // authors.textContent = book.volumeInfo.authors || "No authors";
-        //         // description.textContent = book.volumeInfo.description || "No description";
-        //         // cover.setAttribute("src", book.volumeInfo.imageLinks.smallThumbnail);
-
-        //         books.forEach((bookElement, index) => {
-        //             const bookIndex = getUniqueBookIndex(usedIndices, totalBooks);
-        //             const bookData = data.items[bookIndex].volumeInfo;
-
-        //             const title = bookElement.querySelector(".book_title");
-        //             const author = bookElement.querySelector(".book_author");
-        //             const description = bookElement.querySelector(".book_description");
-        //             const cover = bookElement.querySelector(".book_cover");
-
-        //             title.textContent = bookData.title || "No title";
-        //             author.textContent = bookData.authors || "No authors";
-        //             description.textContent = bookData.description || "No description";
-        //             cover.setAttribute("src", bookData.imageLinks?.smallThumbnail);
-        //         });
-        //     })
-        //     .catch(error => console.log("Error fetching book images", error));
-    </script>
-
     <div class="body">
         <div class="header">
             <a href='homepage.html' id="logo"><img src="TBC.png"></a>
@@ -225,7 +157,7 @@
         <a href="index 2.html" class="button">Join</a>
     </div>
 
-    <div>
+    <div class = "book_recommendation">
         <h2>Get a book recommendation</h2>
         <!-- <form action="/submit" method="POST" id="book-rec">
             <label for="books">Choose a book genre:</label> -->
@@ -246,19 +178,28 @@
         <div class="book">
             <div class="book_title"></div>
             <div class="book_author"></div>
-            <div class="book_description"></div>
+            <div class="book-description">
+                <p class="truncated-description"></p>
+                <p class="full-description"></p>
+              </div>
             <img src="" class="book_cover">
         </div>
         <div class="book">
             <div class="book_title"></div>
             <div class="book_author"></div>
-            <div class="book_description"></div>
+            <div class="book-description">
+                <p class="truncated-description"></p>
+                <p class="full-description"></p>
+              </div>
             <img src="" class="book_cover">
         </div>
         <div class="book">
             <div class="book_title"></div>
             <div class="book_author"></div>
-            <div class="book_description"></div>
+            <div class="book-description">
+                <p class="truncated-description"></p>
+                <p class="full-description"></p>
+              </div>
             <img src="" class="book_cover">
         </div>
     </div>
@@ -272,6 +213,65 @@
             <li> <a href='resources.html'>Resources</a></li>
         </ul>
     </div>
+    <script>
+        const searchButton = document.getElementById("submit_query");
+    const categorySelect = document.getElementById('book_category');
+    const maxDescriptionLength = 150;
+
+    searchButton.addEventListener('click', function () {
+    const category = categorySelect.value;
+
+    fetch(`https://www.googleapis.com/books/v1/volumes?q=subject:${category}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            const bookSection = document.getElementById("book_section");
+            const books = bookSection.querySelectorAll(".book");
+
+            var usedIndices = [];
+            var totalBooks = data.items.length;
+
+            books.forEach((bookElement, index) => {
+                const bookIndex = getUniqueBookIndex(usedIndices, totalBooks);
+                const bookData = data.items[bookIndex].volumeInfo;
+
+                const title = bookElement.querySelector(".book_title");
+                const author = bookElement.querySelector(".book_author");
+                const truncatedDescription = bookElement.querySelector(".truncated-description");
+                const fullDescription = bookElement.querySelector(".full-description");
+
+                const cover = bookElement.querySelector(".book_cover");
+
+                title.textContent = bookData.title || "No title";
+                author.textContent = bookData.authors || "No authors";
+
+                let shortDescription = bookData.description || "No description";
+                if (shortDescription.length > maxDescriptionLength) {
+                    shortDescription = shortDescription.substring(0, maxDescriptionLength) + "...";
+                }
+                truncatedDescription.textContent = shortDescription;
+                fullDescription.textContent = bookData.description;
+
+                bookElement.addEventListener('mouseover', () => {
+                    truncatedDescription.style.display = "none";
+                    fullDescription.style.display = "block";
+                });
+
+                bookElement.addEventListener('mouseout', () => {
+                    truncatedDescription.style.display = "block";
+                    fullDescription.style.display = "none";
+                });
+
+                cover.setAttribute("src", bookData.imageLinks?.smallThumbnail);
+            });
+        })
+        .catch(error => console.log("Error fetching book images", error));
+    });
+    </script>
 </body>
 
 </html>
