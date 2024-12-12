@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,20 +12,22 @@
       --black: #171717;
       --cream: #F4E5DD;
     }
-    h2{
-      color:  #0c3356;
+
+    h2 {
+      color: #0c3356;
       font-size: 50px;
       text-align: center;
       padding: 1%;
     }
+
     /* Form Container */
     .form-container {
-      margin: 20px auto; 
+      margin: 20px auto;
       font-size: 22px;
       border-radius: 5px;
       background-color: #F4E5DD;
-      padding: 40px; 
-      max-width: 500px; 
+      padding: 40px;
+      max-width: 500px;
       width: 100%;
       padding: 2rem;
       border-radius: 8px;
@@ -42,7 +45,7 @@
 
     /* Form Labels and Inputs */
     label {
-      color:  #3172AE;
+      color: #3172AE;
       display: block;
       margin-bottom: 0.5rem;
       font-weight: bold;
@@ -61,7 +64,7 @@
     }
 
     input[type="submit"] {
-      background-color:  #3172AE;
+      background-color: #3172AE;
       color: var(--cream);
       font-weight: bold;
       padding: 0.75rem;
@@ -72,7 +75,7 @@
     }
 
     input[type="submit"]:hover {
-      background-color:  #3E8EDE;
+      background-color: #3E8EDE;
     }
 
     /* Error Message */
@@ -94,8 +97,9 @@
   <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
+
 <body>
-  <div class ="body">
+  <div class="body">
     <div class="header">
       <a href='homepage.html' id="logo"><img src="TBC.png"></a>
       <a href='about.html' class="a">About</a>
@@ -135,67 +139,68 @@
     <div class="success">Thank you for signing up! Welcome to the club!</div>
   </div>
 
-<script>
-  function validateForm() {
-    // Get form elements
-    const clubSelection = document.getElementById('clubSelection').value;
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const favoriteBook = document.getElementById('favoriteBook').value;
+  <script>
+    function validateForm() {
+      // Get form elements
+      const clubSelection = document.getElementById('clubSelection').value;
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const favoriteBook = document.getElementById('favoriteBook').value;
 
-    // Error elements
-    const clubError = document.getElementById('clubError');
-    const nameError = document.getElementById('nameError');
-    const emailError = document.getElementById('emailError');
-    const bookError = document.getElementById('bookError');
+      // Error elements
+      const clubError = document.getElementById('clubError');
+      const nameError = document.getElementById('nameError');
+      const emailError = document.getElementById('emailError');
+      const bookError = document.getElementById('bookError');
 
-    // Reset error messages
-    let isValid = true;
-    clubError.style.display = 'none';
-    nameError.style.display = 'none';
-    emailError.style.display = 'none';
-    bookError.style.display = 'none';
+      // Reset error messages
+      let isValid = true;
+      clubError.style.display = 'none';
+      nameError.style.display = 'none';
+      emailError.style.display = 'none';
+      bookError.style.display = 'none';
 
-    // Validate Club Selection
-    if (!clubSelection) {
-      clubError.style.display = 'block';
-      isValid = false;
-    }
+      // Validate Club Selection
+      if (!clubSelection) {
+        clubError.style.display = 'block';
+        isValid = false;
+      }
 
-    // Validate Name
-    if (!name) {
-      nameError.style.display = 'block';
-      isValid = false;
-    }
+      // Validate Name
+      if (!name) {
+        nameError.style.display = 'block';
+        isValid = false;
+      }
 
-    // Validate Email
-    if (!email || !email.includes("@")) {
-      emailError.style.display = 'block';
-      isValid = false;
-    }
+      // Validate Email
+      if (!email || !email.includes("@")) {
+        emailError.style.display = 'block';
+        isValid = false;
+      }
 
-    // Validate Favorite Book
-    if (!favoriteBook) {
-      bookError.style.display = 'block';
-      isValid = false;
-    }
+      // Validate Favorite Book
+      if (!favoriteBook) {
+        bookError.style.display = 'block';
+        isValid = false;
+      }
 
-    // Success effect if the form is valid
-    if (isValid) {
+      // Success effect if the form is valid
+      if (isValid) {
         $(".success").slideDown(1000).delay(2000).slideUp(1000);
-    }
+      }
 
-    return false; // Prevent actual form submission for demonstration purposes
-  }
-</script>
-<div class="footer">
-  <p>"Read a Book Today- Join Today"</p>
-  <p>&copy; 2024 Tufts University book Clubs. All right reserved.</p>   
-  <ul id="contact">
-    <li><a href='contact.html'>Contact</a></li>
-    <li><a href='donations.html'>Donations</a></li>
-    <li> <a href='resources.html'>Resources</a></li>
-</ul>  
-</div>
+      return false; // Prevent actual form submission for demonstration purposes
+    }
+  </script>
+  <div class="footer">
+    <p>"Read a Book Today- Join Today"</p>
+    <p>&copy; 2024 Tufts University book Clubs. All right reserved.</p>
+    <ul id="contact">
+      <li><a href='contact.html'>Contact</a></li>
+      <li><a href='donations.html'>Donations</a></li>
+      <li> <a href='resources.html'>Resources</a></li>
+    </ul>
+  </div>
 </body>
+
 </html>

@@ -3,24 +3,23 @@ html {
   margin: 0;
   padding: 0 0 0px;
   /* Add bottom padding to fit the footer's height */
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  background-color: #FDFFF1;
-  background: linear-gradient(to bottom, #FDFFF1, #f0f0f0)
+  font-family: 'Helvetica Neue', sans-serif;
+  background-color: #f5f5f5;
 }
 
 .header {
   overflow: hidden;
   position: relative;
-  background-color: rgba(81, 44, 29, 0.5);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: rgb(62, 45, 35);
   transition: background-color 0.3s ease;
-  background-image: url('bookhead.png');
+  /* background-image: url('bookhead.png'); */
   background-repeat: repeat-x;
   max-height: 100px;
+  color: whitesmoke;
 }
 
 .a {
-  color: #ECE6D1;
+  color: whitesmoke;
   float: right;
   text-align: center;
   padding: 30px 16px;
