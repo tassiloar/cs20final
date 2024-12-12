@@ -256,15 +256,15 @@
                 truncatedDescription.textContent = shortDescription;
                 fullDescription.textContent = bookData.description;
 
-                bookElement.addEventListener('mouseover', () => {
-                    truncatedDescription.style.display = "none";
-                    fullDescription.style.display = "block";
-                });
+                // bookElement.addEventListener('mouseover', () => {
+                //     truncatedDescription.style.display = "none";
+                //     fullDescription.style.display = "block";
+                // });
 
-                bookElement.addEventListener('mouseout', () => {
-                    truncatedDescription.style.display = "block";
-                    fullDescription.style.display = "none";
-                });
+                // bookElement.addEventListener('mouseout', () => {
+                //     truncatedDescription.style.display = "block";
+                //     fullDescription.style.display = "none";
+                // });
 
                 cover.setAttribute("src", bookData.imageLinks?.smallThumbnail);
             });
